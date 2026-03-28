@@ -29,6 +29,38 @@
     </ul>
 </section>
 
+<section class="card">
+    <h3>Rating Trends</h3>
+    <canvas id="trendChart"></canvas>
+</section>
+
+<section class="card">
+    <h3>Loyal Customers</h3>
+    {% for user in dashboard.loyal_customers %}
+    <div class="review-card">
+        <p><strong>{{ user._id }}</strong></p>
+        <p>Visits: {{ user.visitCount }}</p>
+        <p>Average Rating Given: {{ user.avgRating | round(2) }}</p>
+    </div>
+    {% else %}
+    <p>No repeat customers found.</p>
+    {% endfor %}
+</section>
+
+<section class="card">
+    <h3>Customer Segmentation</h3>
+    <canvas id="segmentChart"></canvas>
+</section>
+
+<section class="card">
+    <h3>Text-Based Review Insights</h3>
+    <ul>
+        <li>Cleanliness mentions: {{ dashboard.insights.clean_mentions }}</li>
+        <li>Noise-related mentions: {{ dashboard.insights.noise_mentions }}</li>
+        <li>Service-related mentions: {{ dashboard.insights.service_mentions }}</li>
+    </ul>
+</section>
+
 <section>
     <h3>Recent Low-Rated Reviews</h3>
     {% for review in dashboard.lowRatedReviews %}
@@ -41,6 +73,57 @@
     <p>No low-rated reviews found.</p>
     {% endfor %}
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const trendData = {{ dashboard.trends | tojson }};
+    const segmentData = {{ dashboard.segments | tojson }};
+
+    const trendLabels = trendData.map(item => `${item._id.month}/${item._id.year}`);
+    const trendRatings = trendData.map(item => item.avgRating);
+
+    const segmentLabels = segmentData.map(item => item._id);
+    const segmentCounts = segmentData.map(item => item.count);
+
+    const trendCanvas = document.getElementById("trendChart");
+    if (trendCanvas) {
+        new Chart(trendCanvas, {
+            type: "line",
+            data: {
+                labels: trendLabels,
+                datasets: [{
+                    label: "Average Rating",
+                    data: trendRatings,
+                    borderWidth: 2,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        });
+    }
+
+    const segmentCanvas = document.getElementById("segmentChart");
+    if (segmentCanvas) {
+        new Chart(segmentCanvas, {
+            type: "pie",
+            data: {
+                labels: segmentLabels,
+                datasets: [{
+                    data: segmentCounts
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        });
+    }
+</script>
+
 {% else %}
 <p>Hotel data not found.</p>
 {% endif %}

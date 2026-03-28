@@ -122,3 +122,22 @@ body {
     color: #6b7280;
     margin: 8px 0 16px;
 }
+
+canvas {
+    max-width: 100%;
+    margin-top: 20px;
+}
+
+.card ul {
+    padding-left: 20px;
+}
+
+.card li {
+    margin-bottom: 8px;
+}
+
+#segmentChart {
+    max-width: 300px;
+    max-height: 300px;
+    margin: 0 auto;
+}

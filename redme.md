@@ -1,17 +1,4 @@
-File details
-main.py: The main file where execution starts
-frontend.py: Implementation of tables and graph
-mongo_conn.py: Implementation of mongodb queries, fetching data from MongoDB, and analysis of data
-config.py: Configuration details for mongo db and python connection
-
-
-Requirements
-python 3.11
-pip install configparser
-pip install pymongo
-pip install tkinter
-pip install pandas matplotlib
-
+dataset: https://www.kaggle.com/datasets/datafiniti/hotel-reviews?resource=download&select=Datafiniti_Hotel_Reviews_Jun19.csv
 
 To create customized collection
 hotels:

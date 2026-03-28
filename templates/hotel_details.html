@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Hotel Details{% endblock %}
+
+{% block content %}
+{% if hotel %}
+<section class="card">
+    <h2>{{ hotel.name }}</h2>
+    <p>{{ hotel.address }}, {{ hotel.city }}, {{ hotel.province }} {{ hotel.postalCode }}</p>
+    <p><strong>Average Rating:</strong> {{ hotel.average_rating }} / 5</p>
+    <p><strong>Total Reviews:</strong> {{ hotel.review_count }}</p>
+</section>
+
+<section>
+    <h3>Guest Reviews</h3>
+    {% for review in hotel.reviews %}
+    <div class="review-card">
+        <p><strong>{{ review.title or "Review" }}</strong></p>
+        <p>Rating: {{ review.rating }}/5</p>
+        <p>{{ review.text }}</p>
+        <p class="muted">By {{ review.username or "Anonymous" }}</p>
+    </div>
+    {% else %}
+    <p>No reviews available.</p>
+    {% endfor %}
+</section>
+{% else %}
+<p>Hotel not found.</p>
+{% endif %}
+{% endblock %}

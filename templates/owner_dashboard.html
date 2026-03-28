@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Owner Dashboard{% endblock %}
+
+{% block content %}
+{% if dashboard.hotel %}
+<h2>Owner Dashboard - {{ dashboard.hotel.name }}</h2>
+<p class="muted">{{ dashboard.hotel.city }}, {{ dashboard.hotel.province }}</p>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>{{ dashboard.summary.averageRating }}</h3>
+        <p>Average Rating</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ dashboard.summary.totalReviews }}</h3>
+        <p>Total Reviews</p>
+    </div>
+</div>
+
+<section class="card">
+    <h3>Rating Distribution</h3>
+    <ul>
+        {% for item in dashboard.ratingDistribution %}
+        <li>{{ item._id }} Star: {{ item.count }} reviews</li>
+        {% else %}
+        <li>No rating distribution data available.</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section>
+    <h3>Recent Low-Rated Reviews</h3>
+    {% for review in dashboard.lowRatedReviews %}
+    <div class="review-card">
+        <p><strong>{{ review.title or "Low Rated Review" }}</strong></p>
+        <p>Rating: {{ review.rating }}/5</p>
+        <p>{{ review.text }}</p>
+    </div>
+    {% else %}
+    <p>No low-rated reviews found.</p>
+    {% endfor %}
+</section>
+{% else %}
+<p>Hotel data not found.</p>
+{% endif %}
+{% endblock %}

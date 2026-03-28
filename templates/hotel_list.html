@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Hotels{% endblock %}
+
+{% block content %}
+<h2>Hotel Search Results</h2>
+
+{% if city or name %}
+<p class="muted">
+    {% if city %}City: <strong>{{ city }}</strong>{% endif %}
+    {% if name %} | Hotel: <strong>{{ name }}</strong>{% endif %}
+</p>
+{% endif %}
+
+<div class="card-grid">
+    {% for hotel in hotels %}
+    <div class="card">
+        <h3>{{ hotel.name }}</h3>
+        <p>{{ hotel.address }}</p>
+        <p>{{ hotel.city }}, {{ hotel.province }} {{ hotel.postalCode }}</p>
+
+        <div class="button-row">
+            <a class="btn" href="/hotel/{{ hotel._id }}">View Details</a>
+            <a class="btn secondary" href="/owner/{{ hotel._id }}">Owner Dashboard</a>
+        </div>
+    </div>
+    {% else %}
+    <p>No hotels found.</p>
+    {% endfor %}
+</div>
+{% endblock %}

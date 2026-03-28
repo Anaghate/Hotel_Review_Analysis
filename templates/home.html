@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Find Hotels and Explore Guest Reviews</h1>
+    <p>Search by city or hotel name and discover hotel insights built from real review data.</p>
+
+    <form action="/hotels" method="GET" class="search-form">
+        <input type="text" name="city" placeholder="Enter city">
+        <input type="text" name="name" placeholder="Enter hotel name">
+        <button type="submit">Search Hotels</button>
+    </form>
+</section>
+{% endblock %}

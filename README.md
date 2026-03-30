@@ -42,7 +42,6 @@ The system leverages **MongoDB aggregation pipelines** to power real-time analyt
 ![Hotel Details](docs/hotel_details.png)
 ![Owner Dashboard](docs/owner_dashboard1.png)
 ![Owner Dashboard](docs/owner_dashboard2.png)
-![Owner Dashboard](docs/owner_dashboard3.png)
 ![Owner Dashboard](docs/owner_dashboard4.png)
 
 ---
@@ -105,24 +104,6 @@ HTML/CSS + Chart.js (Frontend Dashboard)
 Render (Deployment) + MongoDB Atlas (Cloud DB)
 ```
 ---
-
-## ⚙️ Core Analytics Implemented
-
-### 📈 Rating Trends
-
-* Monthly aggregation using `$group` + `$year` + `$month`
-
-### 🔁 Loyalty Detection
-
-* Identifies repeat users using aggregation pipelines
-
-### 🧠 Customer Segmentation
-
-* Categorizes users into:
-
-  * Promoters (≥4)
-  * Neutral (≥3)
-  * Detractors (<3)
 
 ### 🧾 Text-Based Insights
 
